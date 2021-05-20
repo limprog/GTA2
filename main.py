@@ -4,7 +4,7 @@ import time
 from constants import *
 from game import *
 def main_loop():
-    pass
+    print("меня здесь не будет")
 def init():
     pass
 import game
