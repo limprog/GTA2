@@ -1,6 +1,7 @@
 from game import *
 from constants import *
 import pygame
+import time
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -11,24 +12,26 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.speedx = 0
         self.speedy = 0
-
         keystate = pygame.key.get_pressed()
-        if keystate[pygame.K_a]:
+        if keystate[pygame.K_a] or keystate[pygame.K_LEFT]:
             self.speedx = -8
-        elif keystate[pygame.K_LEFT]:
-            self.speedx = -8
-        if keystate[pygame.K_d]:
+        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_a] or keystate[pygame.K_LEFT]):
+            self.speedx = -14
+
+        if keystate[pygame.K_d] or keystate[pygame.K_RIGHT]:
             self.speedx = 8
-        elif keystate[pygame.K_RIGHT]:
-            self.speedx = 8
-        if keystate[pygame.K_w]:
+        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_d] or keystate[pygame.K_RIGHT]):
+            self.speedx = 14
+
+        if keystate[pygame.K_w] or keystate[pygame.K_UP]:
             self.speedy = -8
-        elif keystate[pygame.K_UP]:
-            self.speedy = -8
-        if keystate[pygame.K_s]:
+        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_w] or keystate[pygame.K_UP]):
+            self.speedy = -14
+
+        if keystate[pygame.K_s] or keystate[pygame.K_DOWN]:
             self.speedy = 8
-        elif keystate[pygame.K_DOWN]:
-            self.speedy = 8
+        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_s] or keystate[pygame.K_DOWN]):
+            self.speedx = -14
 
         self.rect.y += self.speedy
         self.rect.x += self.speedx
