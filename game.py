@@ -1,6 +1,4 @@
-import pygame
-from constants import *
-from sprites.Player  import *
+from sprites.Player import *
 class Game:
     def __init__(self):
 
