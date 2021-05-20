@@ -2,6 +2,9 @@ from game import *
 from constants import *
 import pygame
 import time
+'''
+Класс, описывающий сущность игрока
+'''
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
