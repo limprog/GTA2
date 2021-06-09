@@ -12,30 +12,50 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(GREEN)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-    def update(self):
         self.speedx = 0
         self.speedy = 0
-        keystate = pygame.key.get_pressed()
+
+    def translateMovement(self, keystate):
+        key_dict = {'left':keystate[pygame.K_a] or keystate[pygame.K_LEFT], 'up':keystate[pygame.K_w] or keystate[pygame.K_UP],
+                    "right":keystate[pygame.K_d] or keystate[pygame.K_RIGHT], 'down':keystate[pygame.K_s] or keystate[pygame.K_DOWN]}
+        return key_dict
+
+    def update(self):
+        keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8
-        if keystate[pygame.K_a] or keystate[pygame.K_LEFT]:
-            self.speedx = -abs_speed
-        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_a] or keystate[pygame.K_LEFT]):
-            self.speedx = -14
+        if keystate['left']:
+            self.speedx -= 0.1
+            if self.speedx <= -abs_speed:
+                self.speedx = -abs_speed
 
-        if keystate[pygame.K_d] or keystate[pygame.K_RIGHT]:
-            self.speedx = abs_speed
-        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_d] or keystate[pygame.K_RIGHT]):
-            self.speedx = 14
+        if keystate['right']:
+            self.speedx += 0.1
+            if self.speedx >= abs_speed:
+                self.speedx = abs_speed
 
-        if keystate[pygame.K_w] or keystate[pygame.K_UP]:
-            self.speedy = -abs_speed
-        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_w] or keystate[pygame.K_UP]):
-            self.speedy = -14
+        if keystate['down']:
+            self.speedy += 0.1
+            if self.speedy <= -abs_speed:
+                self.speedy = -abs_speed
 
-        if keystate[pygame.K_s] or keystate[pygame.K_DOWN]:
-            self.speedy = abs_speed
-        if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_s] or keystate[pygame.K_DOWN]):
-            self.speedx = -14
+        if keystate['up']:
+            self.speedy -= 0.1
+            if self.speedy >= abs_speed:
+                self.speedy = abs_speed
+
+        if all(v==0 for v in keystate.values()):
+            if self.speedx <= -0.2:
+                self.speedx += 0.2
+            elif self.speedx >= 0.2:
+                self.speedx -= 0.2
+            else:
+                self.speedx = 0
+            if self.speedy <= -0.2:
+                self.speedy += 0.2
+            elif self.speedy >= 0.2:
+                self.speedy -= 0.2
+            else:
+                self.speedy = 0
 
         self.rect.y += self.speedy
         self.rect.x += self.speedx
