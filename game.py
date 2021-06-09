@@ -1,4 +1,6 @@
 from sprites.Player import *
+from sprites.Weapon import *
+from sprites.Cartridges import *
 class Game:
     def __init__(self):
 
@@ -11,7 +13,9 @@ class Game:
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
         player = Player()
-        all_sprites.add(player)
+        weapon = Weapon()
+        сartridges = Cartridges()
+        all_sprites.add(player, weapon, сartridges)
 
         # Цикл игры
         running = True
