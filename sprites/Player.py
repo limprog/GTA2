@@ -16,23 +16,24 @@ class Player(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         keystate = pygame.key.get_pressed()
+        abs_speed = 8
         if keystate[pygame.K_a] or keystate[pygame.K_LEFT]:
-            self.speedx = -8
+            self.speedx = -abs_speed
         if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_a] or keystate[pygame.K_LEFT]):
             self.speedx = -14
 
         if keystate[pygame.K_d] or keystate[pygame.K_RIGHT]:
-            self.speedx = 8
+            self.speedx = abs_speed
         if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_d] or keystate[pygame.K_RIGHT]):
             self.speedx = 14
 
         if keystate[pygame.K_w] or keystate[pygame.K_UP]:
-            self.speedy = -8
+            self.speedy = -abs_speed
         if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_w] or keystate[pygame.K_UP]):
             self.speedy = -14
 
         if keystate[pygame.K_s] or keystate[pygame.K_DOWN]:
-            self.speedy = 8
+            self.speedy = abs_speed
         if keystate[pygame.K_LSHIFT] and (keystate[pygame.K_s] or keystate[pygame.K_DOWN]):
             self.speedx = -14
 
@@ -46,4 +47,4 @@ class Player(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
-
+        prev_keystate = keystate
