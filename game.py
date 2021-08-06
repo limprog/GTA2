@@ -30,7 +30,6 @@ class Game:
 
             # Обновление
             all_sprites.update()
-            pygame.sprite.spritecollide(player, weapon, False)
             # Рендеринг
             screen.fill(BLACK)
             all_sprites.draw(screen)
