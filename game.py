@@ -1,3 +1,5 @@
+import pygame.sprite
+
 from sprites.Player import *
 from sprites.Weapon import *
 from sprites.Cartridges import *
@@ -12,10 +14,12 @@ class Game:
         clock = pygame.time.Clock()
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
+        ammunition = pygame.sprite.Group()
         player = Player()
         weapon = Weapon()
         сartridges = Cartridges()
         all_sprites.add(player, weapon, сartridges)
+        ammunition.add(сartridges,weapon)
 
         # Цикл игры
         running = True
@@ -30,6 +34,11 @@ class Game:
 
             # Обновление
             all_sprites.update()
+
+            hits = pygame.sprite.spritecollide(player, ammunition, True)
+            if hits:
+                running = True
+
             # Рендеринг
             screen.fill(BLACK)
             all_sprites.draw(screen)

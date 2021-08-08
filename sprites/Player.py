@@ -68,4 +68,3 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
         prev_keystate = keystate
- #
