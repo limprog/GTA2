@@ -63,10 +63,10 @@ class Player(pygame.sprite.Sprite):
             #self.rect.right = WIDTH
             self.rect.x = 0
         if self.rect.x < 0:
-            self.rect.x = 1900
+            self.rect.x = WIDTH - 50
             #self.rect.x =
         if self.rect.y <= 0:
-            self.rect.y = HEIGHT
+            self.rect.y = HEIGHT - 50
         if self.rect.bottom > HEIGHT:
             self.rect.y = 0
         prev_keystate = keystate
