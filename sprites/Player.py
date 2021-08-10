@@ -19,7 +19,6 @@ class Player(pygame.sprite.Sprite):
         key_dict = {'left':keystate[pygame.K_a] or keystate[pygame.K_LEFT], 'up':keystate[pygame.K_w] or keystate[pygame.K_UP],
                     "right":keystate[pygame.K_d] or keystate[pygame.K_RIGHT], 'down':keystate[pygame.K_s] or keystate[pygame.K_DOWN]}
         return key_dict
-
     def update(self):
         keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8
@@ -35,13 +34,13 @@ class Player(pygame.sprite.Sprite):
 
         if keystate['down']:
             self.speedy += 0.1
-            if self.speedy <= -abs_speed:
-                self.speedy = -abs_speed
+            if self.speedy >= 8:
+                self.speedy = 8
 
         if keystate['up']:
             self.speedy -= 0.1
-            if self.speedy >= abs_speed:
-                self.speedy = abs_speed
+            if self.speedy <= -8:
+                self.speedy = -8
 
         if all(v==0 for v in keystate.values()):
             if self.speedx <= -0.2:
@@ -60,13 +59,15 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
-            #self.rect.right = WIDTH
             self.rect.x = 0
+            self.new = 1
         if self.rect.x < 0:
             self.rect.x = WIDTH - 50
-            #self.rect.x =
+            self.new = 1
         if self.rect.y <= 0:
             self.rect.y = HEIGHT - 50
+            self.new = 1
         if self.rect.bottom > HEIGHT:
             self.rect.y = 0
+            self.new = 1
         prev_keystate = keystate
