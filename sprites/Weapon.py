@@ -9,7 +9,7 @@ class Weapon (pygame.sprite.Sprite):
         self.image = pygame.Surface((25, 25))
         self.image.fill(BLUE)
         self.rect = self.image.get_rect()
-        self.rect.center  = (random.randint(0,WIDTH), random.randint(0, HEIGHT) )
+        self.rect.center = (random.randint(0,WIDTH), random.randint(0, HEIGHT) )
     def update(self):
         pass
         #if self.new == 1:

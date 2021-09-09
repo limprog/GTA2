@@ -5,6 +5,7 @@ import time
 '''
 Класс, описывающий сущность игрока
 '''
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -14,11 +15,13 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
         self.speedy = 0
+        self.new  = 0
 
     def translateMovement(self, keystate):
         key_dict = {'left':keystate[pygame.K_a] or keystate[pygame.K_LEFT], 'up':keystate[pygame.K_w] or keystate[pygame.K_UP],
                     "right":keystate[pygame.K_d] or keystate[pygame.K_RIGHT], 'down':keystate[pygame.K_s] or keystate[pygame.K_DOWN]}
         return key_dict
+
     def update(self):
         keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8

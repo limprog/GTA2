@@ -20,7 +20,8 @@ class Game:
         сartridges = Cartridges()
         all_sprites.add(player, weapon, сartridges)
         ammunition.add(сartridges,weapon)
-
+        if player.new == 1:
+            all_sprites.add(weapon)
         # Цикл игры
         running = True
         while running:
@@ -37,7 +38,7 @@ class Game:
 
             hits = pygame.sprite.spritecollide(player, ammunition, True)
             if hits:
-                running = True
+               running = True
 
             # Рендеринг
             screen.fill(BLACK)
