@@ -9,7 +9,7 @@ class Game:
 
         # Создаем игру и окно
         pygame.init()
-        # pygame.mixer.init()
+        #pygame.mixer.init()
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("GTA")
         clock = pygame.time.Clock()
@@ -19,7 +19,7 @@ class Game:
         backpack = Backpack()
         player = Player()
 
-
+        all_sprites.add(player,Weapon(), Cartridges())
         # Цикл игры
         running = True
         while running:
@@ -36,8 +36,8 @@ class Game:
             # Обновление
             all_sprites.update()
 
-            сartridges_collision= pygame.sprite.spritecollide(player, backpack.сartridges_group , True)
-            weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
+            сartridges_collision= pygame.sprite.spritecollide(player, backpack.get_catriges(), True)
+            weapon_collision = pygame.sprite.spritecollide(player, backpack.get_weapons(), True)
 
 
            # if hits:
