@@ -3,6 +3,7 @@ import pygame.sprite
 from sprites.Player import *
 from sprites.Weapon import *
 from sprites.Cartridges import *
+from sprites.Backpack import *
 class Game:
     def __init__(self):
 
@@ -14,19 +15,18 @@ class Game:
         clock = pygame.time.Clock()
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
-        ammunition = pygame.sprite.Group()
+
+        backpack = Backpack()
         player = Player()
-        weapon = Weapon()
-        сartridges = Cartridges()
-        all_sprites.add(player, weapon, сartridges)
-        ammunition.add(сartridges,weapon)
-        if player.new == 1:
-            all_sprites.add(weapon)
+
+
         # Цикл игры
         running = True
         while running:
             # Держим цикл на правильной скорости
             clock.tick(FPS)
+
+
             # Ввод процесса (события)
             for event in pygame.event.get():
                 # check for closing window
@@ -36,9 +36,12 @@ class Game:
             # Обновление
             all_sprites.update()
 
-            hits = pygame.sprite.spritecollide(player, ammunition, True)
-            if hits:
-               running = True
+            сartridges_collision= pygame.sprite.spritecollide(player, backpack.сartridges_group , True)
+            weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
+
+
+           # if hits:
+            #   running = False
 
             # Рендеринг
             screen.fill(BLACK)
