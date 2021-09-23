@@ -19,7 +19,7 @@ class Game:
         backpack = Backpack()
         player = Player()
 
-        all_sprites.add(player,Weapon(), Cartridges())
+        all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group)
         # Цикл игры
         running = True
         while running:
@@ -36,9 +36,17 @@ class Game:
             # Обновление
             all_sprites.update()
 
-            сartridges_collision= pygame.sprite.spritecollide(player, backpack.get_catriges(), True)
-            weapon_collision = pygame.sprite.spritecollide(player, backpack.get_weapons(), True)
+            сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
 
+            weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
+            if player.new == 1:
+                if random.randint(0,3) == 0:
+                    all_sprites.add(backpack.сartridges)
+                    backpack.сartridges_group.add(backpack.сartridges)
+                if random.randint(0,0) == 0:
+                    backpack.weapon.update()
+                    all_sprites.add(backpack.weapon)
+                    backpack.weapon_group.add(backpack.weapon)
 
            # if hits:
             #   running = False

@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         return key_dict
 
     def update(self):
+        self.new = 0
         keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8
         if keystate['left']:
@@ -58,6 +59,7 @@ class Player(pygame.sprite.Sprite):
                 self.speedy -= 0.2
             else:
                 self.speedy = 0
+
 
         self.rect.y += self.speedy
         self.rect.x += self.speedx
