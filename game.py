@@ -41,12 +41,14 @@ class Game:
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             if player.new == 1:
                 if random.randint(0,3) == 0:
+                    player.new = 0
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
                 if random.randint(0,0) == 0:
-                    backpack.weapon.update()
+                    player.new = 0
                     all_sprites.add(backpack.weapon)
                     backpack.weapon_group.add(backpack.weapon)
+                    backpack.weapon.moveToRandomPoint()
 
            # if hits:
             #   running = False
