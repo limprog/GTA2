@@ -44,7 +44,8 @@ class Game:
                     player.new = 0
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
-                if random.randint(0,0) == 0:
+                    backpack.сartridges.moveToRandomPoint()
+                if random.randint(0,7) == 0:
                     player.new = 0
                     all_sprites.add(backpack.weapon)
                     backpack.weapon_group.add(backpack.weapon)

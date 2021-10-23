@@ -1,6 +1,5 @@
-import pygame
 from sprites.Player import *
-from sprites.Weapon import *
+from sprites.Weapon.Weapon import *
 from sprites.Cartridges import *
 class Backpack:
     def __init__(self):

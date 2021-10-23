@@ -10,3 +10,8 @@ class Cartridges(pygame.sprite.Sprite):
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center  = (random.randint(0,WIDTH), random.randint(0, HEIGHT) )
+    def moveToRandomPoint(self):
+        self.rect.x = random.randint(0, WIDTH)
+        self.rect.y = random.randint(0, HEIGHT)
+    def update(self):
+        pass
