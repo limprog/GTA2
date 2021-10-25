@@ -70,13 +70,13 @@ class Player(pygame.sprite.Sprite):
             if self.speedx <= -0.2:
                 self.speedx += 0.2
             elif self.speedx >= 0.2:
-                self.speedx -= 0.2
+                self.speedx -= 0.7
             else:
                 self.speedx = 0
             if self.speedy <= -0.2:
                 self.speedy += 0.2
             elif self.speedy >= 0.2:
-                self.speedy -= 0.2
+                self.speedy -= 0.7
             else:
                 self.speedy = 0
 
