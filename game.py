@@ -4,6 +4,7 @@ from sprites.Player import *
 from sprites.Weapon import *
 from sprites.Cartridges import *
 from sprites.Backpack import *
+from MapGenerator.WebGenerator import *
 class Game:
     def __init__(self):
 
@@ -15,9 +16,18 @@ class Game:
         clock = pygame.time.Clock()
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
+        map_group = pygame.sprite.Group()
 
         backpack = Backpack()
         player = Player()
+
+        web = WebGenerator().createWeb()
+        map_group.add(web)
+
+        for row in web:
+            for cell in row:
+                print('game', cell.rect.x, cell.rect.y)
+                # map_group.add(cell)
 
         all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group)
         # Цикл игры
@@ -35,6 +45,7 @@ class Game:
 
             # Обновление
             all_sprites.update()
+            map_group.update()
 
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
 
@@ -56,7 +67,9 @@ class Game:
 
             # Рендеринг
             screen.fill(BLACK)
+            map_group.draw(screen)
             all_sprites.draw(screen)
+
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
 
