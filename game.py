@@ -25,6 +25,7 @@ class Game:
         map_group.add(web)
 
         for row in web:
+            #
             for cell in row:
                 print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)

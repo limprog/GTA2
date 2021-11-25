@@ -3,7 +3,7 @@ from constants import *
 import random
 
 MATERIALS = {
-    'grass' : GREEN,
+    'grass' : DARKGREEN,
     'beton' : GRAY
 
 }
@@ -16,7 +16,7 @@ class WebCell(pygame.sprite.Sprite):
         self.image.fill(MATERIALS[material])
         self.rect =self.image.get_rect()
         self.rect.center = (x+SIDESIZE//2, y+SIDESIZE//2)
-        # print(self.rect.x, self.rect.y)
+        #print("webcell", self.rect.x, self.rect.y)
 
 
 class WebGenerator:
@@ -28,4 +28,10 @@ class WebGenerator:
         for i in range(self.number_vert_cell):
             for j in range(self.number_hor_cell):
                 self.web[i][j] = WebCell(j*SIDESIZE, i*SIDESIZE, random.choice(list(MATERIALS.keys())))
+                # print("creating", self.web[i][j].rect.y,self.web[i][j].rect.x)
+        print("creating")
+        for i in self.web:
+            for j in i:
+                print(j.rect.y, j.rect.x)
+
         return self.web
