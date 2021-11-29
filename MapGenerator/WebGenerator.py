@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 import random
+import numpy as np
 
 MATERIALS = {
     'grass' : DARKGREEN,
@@ -25,13 +26,21 @@ class WebGenerator:
         self.number_hor_cell = WIDTH // SIDESIZE
     def createWeb(self):
         self.web = [[None]*self.number_hor_cell]*self.number_vert_cell
+        webtest= [[(i, j) for j in range(self.number_hor_cell)] for i in range(self.number_vert_cell)]
+
         for i in range(self.number_vert_cell):
             for j in range(self.number_hor_cell):
-                self.web[i][j] = WebCell(j*SIDESIZE, i*SIDESIZE, random.choice(list(MATERIALS.keys())))
-                # print("creating", self.web[i][j].rect.y,self.web[i][j].rect.x)
-        print("creating")
-        for i in self.web:
-            for j in i:
-                print(j.rect.y, j.rect.x)
+                print(webtest[i][j])
+
+        for a in range(self.number_vert_cell):
+            for b in range(self.number_hor_cell):
+                self.web[a][b] = WebCell(b*SIDESIZE, a*SIDESIZE, random.choice(list(MATERIALS.keys())))
+                webtest[a][b] = (b * SIDESIZE, a * SIDESIZE)
+
+
+        # for i in self.web:
+        #     for j in i:
+        #         pass
+        #         #print(j.rect.y, j.rect.x)
 
         return self.web

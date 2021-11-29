@@ -24,10 +24,10 @@ class Game:
         web = WebGenerator().createWeb()
         map_group.add(web)
 
-        for row in web:
-            #
-            for cell in row:
-                print('game', cell.rect.x, cell.rect.y)
+        # for row in web:
+        #     #
+        #     for cell in row:
+                #print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)
 
         all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group)
