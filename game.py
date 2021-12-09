@@ -21,7 +21,7 @@ class Game:
         backpack = Backpack()
         player = Player()
 
-        web = WebGenerator().createWeb()
+        web = WebGenerator().createWeb
         map_group.add(web)
 
         # for row in web:
