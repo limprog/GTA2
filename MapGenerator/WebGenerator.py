@@ -5,7 +5,8 @@ import random
 
 MATERIALS = {
     'grass' : DARKGREEN,
-    'beton' : GRAY
+    'beton' : GRAY,
+
 
 }
 SIDESIZE = 120
