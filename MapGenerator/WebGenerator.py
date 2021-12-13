@@ -25,24 +25,13 @@ class WebGenerator:
     def __init__(self):
         self.number_vert_cell = HEIGHT // SIDESIZE
         self.number_hor_cell = WIDTH // SIDESIZE
+        self.web = None
     @property
     def createWeb(self):
-        self.web = []
-        for x in range(11):
-            self.web.append([int(y) for y in range(4)])
-        self.web = [[None]*self.number_hor_cell]*self.number_vert_cell
-        webtest= [[(i, j) for j in range(self.number_hor_cell)] for i in range(self.number_vert_cell)]
-
-        for i in range(self.number_vert_cell):
-            for j in range(self.number_hor_cell):
-                print(webtest[i][j])
+        self.web = [[0 for _ in range(self.number_hor_cell)] for _ in range(self.number_vert_cell)]
 
         for a in range(self.number_vert_cell):
             for b in range(self.number_hor_cell):
                 self.web[a][b] = WebCell(b*SIDESIZE, a*SIDESIZE, random.choice(list(MATERIALS.keys())))
-                webtest[a][b] = (b * SIDESIZE, a * SIDESIZE)
-        # for i in self.web:
-        #     for j in i:
-        #         pass
-        #         #print(j.rect.y, j.rect.x)
+
         return self.web
