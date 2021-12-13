@@ -51,14 +51,14 @@ class Game:
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
 
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
-            if player.new == 1:
+            if player.again == 1:
                 if random.randint(0,3) == 0:
-                    player.new = 0
+                    player.again = 0
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
                     backpack.сartridges.moveToRandomPoint()
                 if random.randint(0,7) == 0:
-                    player.new = 0
+                    player.again = 0
                     all_sprites.add(backpack.weapon)
                     backpack.weapon_group.add(backpack.weapon)
                     backpack.weapon.moveToRandomPoint()

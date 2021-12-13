@@ -1,11 +1,12 @@
 from game import *
 from constants import *
 import pygame
+from MapGenerator.WebGenerator import *
 import time
 '''
 Класс, описывающий сущность игрока
 '''
-
+map = WebGenerator()
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -15,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
         self.speedy = 0
-        self.new  = 0
+        self.again  = 0
 
     def translateMovement(self, keystate):
         key_dict = {'left':keystate[pygame.K_a] or keystate[pygame.K_LEFT], 'up':keystate[pygame.K_w] or keystate[pygame.K_UP],
@@ -23,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         return key_dict
 
     def update(self):
-        self.new = 0
+        self.again = 0
         keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8
         abs_speed_shift = 14
@@ -70,13 +71,13 @@ class Player(pygame.sprite.Sprite):
             if self.speedx <= -0.2:
                 self.speedx += 0.2
             elif self.speedx >= 0.2:
-                self.speedx -= 0.7
+                self.speedx -= 0.2
             else:
                 self.speedx = 0
             if self.speedy <= -0.2:
                 self.speedy += 0.2
             elif self.speedy >= 0.2:
-                self.speedy -= 0.7
+                self.speedy -= 0.2
             else:
                 self.speedy = 0
 
@@ -85,14 +86,18 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
             self.rect.x = 0
-            self.new = 1
+            self.again = 1
+            map.createWeb
         if self.rect.x < 0:
             self.rect.x = WIDTH - 50
-            self.new = 1
+            self.again = 1
+            map.createWeb
         if self.rect.y <= 0:
             self.rect.y = HEIGHT - 50
-            self.new = 1
+            self.again = 1
+            map.createWeb
         if self.rect.bottom > HEIGHT:
             self.rect.y = 0
-            self.new = 1
+            self.again = 1
+            map.createWeb
         prev_keystate = keystate
