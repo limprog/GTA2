@@ -6,7 +6,6 @@ import time
 '''
 Класс, описывающий сущность игрока
 '''
-map = WebGenerator()
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -87,17 +86,14 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right > WIDTH:
             self.rect.x = 0
             self.again = 1
-            map.createWeb
         if self.rect.x < 0:
             self.rect.x = WIDTH - 50
             self.again = 1
-            map.createWeb
         if self.rect.y <= 0:
             self.rect.y = HEIGHT - 50
             self.again = 1
-            map.createWeb
         if self.rect.bottom > HEIGHT:
             self.rect.y = 0
             self.again = 1
-            map.createWeb
+
         prev_keystate = keystate

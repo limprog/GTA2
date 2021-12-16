@@ -12,7 +12,7 @@ class Game:
         pygame.init()
         #pygame.mixer.init()
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("GTA")
+        pygame.display.set_caption("****")
         clock = pygame.time.Clock()
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
@@ -43,7 +43,6 @@ class Game:
                 # check for closing window
                 if event.type == pygame.QUIT:
                     running = False
-
             # Обновление
             all_sprites.update()
             map_group.update()
@@ -52,17 +51,18 @@ class Game:
 
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             if player.again == 1:
+                web = WebGenerator().createWeb
+                map_group.empty()
+                map_group.add(web)
                 if random.randint(0,3) == 0:
-                    player.again = 0
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
                     backpack.сartridges.moveToRandomPoint()
                 if random.randint(0,7) == 0:
-                    player.again = 0
                     all_sprites.add(backpack.weapon)
                     backpack.weapon_group.add(backpack.weapon)
                     backpack.weapon.moveToRandomPoint()
-
+                player.again = 0
            # if hits:
             #   running = False
 
