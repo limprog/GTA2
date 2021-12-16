@@ -89,33 +89,37 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.y += self.speedy
         self.rect.x += self.speedx
-        if self.rect.right > WIDTH:
-            self.rect.x = 0
-            self.again = 1
-            self.map_x += 1
-            if self.map_x == 5:
-                if self.rect.left > WIDTH:
-                    self.rect.right = 0
+
         if self.rect.x < 0:
-            self.rect.x = WIDTH - 50
-            self.again = 1
-            self.map_x -= 1
-            if self.map_x == 1:
-                if self.rect.x < 0 :
-                    self.rect.x = 0
-        if self.rect.y <= 0:
-            self.rect.y = HEIGHT - 50
-            self.again = 1
-            self.map_y += 1
-            if self.map_y == 5:
-                if self.rect.y < WIDTH:
-                    self.rect.y = WIDTH
+            if self.map_x > 1:
+                self.rect.x = WIDTH - 50
+                self.again = 1
+                self.map_x -= 1
+            else:
+                self.rect.x = 0
+
+        if self.rect.right > WIDTH:
+            if self.map_x < 5:
+                self.rect.x = 0
+                self.again = 1
+                self.map_x += 1
+            else:
+                self.rect.right = WIDTH
+
+        if self.rect.y < 0:
+            if self.map_y > 1:
+                self.rect.y = HEIGHT
+                self.again = 1
+                self.map_y += 1
+            else:
+                self.rect.right = WIDTH
+
         if self.rect.bottom > HEIGHT:
-            self.rect.y = 0
-            self.map_y -= 1
-            self.again = 1
-            if self.map_y == 1:
-                if self.rect.bottom > HEIGHT:
-                    self.rect.bottom = 0
+            if self.map_y < 5:
+                self.rect.y = 0
+                self.map_y -= 1
+                self.again = 1
+            else:
+                self.rect.bottom = HEIGHT
 
         prev_keystate = keystate
