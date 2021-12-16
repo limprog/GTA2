@@ -3,9 +3,12 @@ from constants import *
 import pygame
 from MapGenerator.WebGenerator import *
 import time
+
 '''
 Класс, описывающий сущность игрока
 '''
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -15,11 +18,15 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
         self.speedy = 0
-        self.again  = 0
+        self.again = 0
+        self.map_x = 3
+        self.map_y = 3
 
     def translateMovement(self, keystate):
-        key_dict = {'left':keystate[pygame.K_a] or keystate[pygame.K_LEFT], 'up':keystate[pygame.K_w] or keystate[pygame.K_UP],
-                    "right":keystate[pygame.K_d] or keystate[pygame.K_RIGHT], 'down':keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift":keystate[pygame.K_LSHIFT]}
+        key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
+                    'up': keystate[pygame.K_w] or keystate[pygame.K_UP],
+                    "right": keystate[pygame.K_d] or keystate[pygame.K_RIGHT],
+                    'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT]}
         return key_dict
 
     def update(self):
@@ -66,7 +73,7 @@ class Player(pygame.sprite.Sprite):
             if self.speedy <= -abs_speed_shift:
                 self.speedy = -abs_speed_shift
 
-        if all(v==0 for v in keystate.values()):
+        if all(v == 0 for v in keystate.values()):
             if self.speedx <= -0.2:
                 self.speedx += 0.2
             elif self.speedx >= 0.2:
@@ -80,20 +87,35 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.speedy = 0
 
-
         self.rect.y += self.speedy
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
             self.rect.x = 0
             self.again = 1
+            self.map_x += 1
+            if self.map_x == 5:
+                if self.rect.left > WIDTH:
+                    self.rect.right = 0
         if self.rect.x < 0:
             self.rect.x = WIDTH - 50
             self.again = 1
+            self.map_x -= 1
+            if self.map_x == 1:
+                if self.rect.x < 0 :
+                    self.rect.x = 0
         if self.rect.y <= 0:
             self.rect.y = HEIGHT - 50
             self.again = 1
+            self.map_y += 1
+            if self.map_y == 5:
+                if self.rect.y < WIDTH:
+                    self.rect.y = WIDTH
         if self.rect.bottom > HEIGHT:
             self.rect.y = 0
+            self.map_y -= 1
             self.again = 1
+            if self.map_y == 1:
+                if self.rect.bottom > HEIGHT:
+                    self.rect.bottom = 0
 
         prev_keystate = keystate
