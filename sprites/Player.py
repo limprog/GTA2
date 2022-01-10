@@ -91,35 +91,44 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speedx
 
         if self.rect.x < 0:
+            print(self.map_x)
             if self.map_x > 1:
                 self.rect.x = WIDTH - 50
                 self.again = 1
                 self.map_x -= 1
             else:
                 self.rect.x = 0
+                self.speedx = 0
 
         if self.rect.right > WIDTH:
+            print(self.map_x)
             if self.map_x < 5:
                 self.rect.x = 0
                 self.again = 1
                 self.map_x += 1
             else:
                 self.rect.right = WIDTH
+                self.speedx = 0
 
-        if self.rect.y < 0:
+        if self.rect.top < 0:
             if self.map_y > 1:
-                self.rect.y = HEIGHT
-                self.again = 1
-                self.map_y += 1
-            else:
-                self.rect.right = WIDTH
-
-        if self.rect.bottom > HEIGHT:
-            if self.map_y < 5:
-                self.rect.y = 0
+                print("self.map_y >= 1:", self.map_y)
+                self.rect.bottom = HEIGHT
                 self.map_y -= 1
                 self.again = 1
             else:
+                self.rect.top = 0
+                self.speedy = 0
+
+        if self.rect.bottom > HEIGHT:
+            print(self.map_y)
+            if self.map_y < 5:
+                self.rect.y = 0
+                self.map_y += 1
+                self.again = 1
+            else:
                 self.rect.bottom = HEIGHT
+                self.speedy = 0
+
 
         prev_keystate = keystate
