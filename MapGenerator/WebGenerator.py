@@ -10,20 +10,22 @@ class Bioms_generator:
         self.bioms_cei = "город"
         self.MATERIALS = {'land': DARKGRAY,'road': GRAY,'water': DARKGRAY}
         self.g = 0
+        self.change = 0
     def bioms_vibir(self):
         if self.g == 0:
             self.g = 1
         else:
-            self.bioms_cei = random.choice(self.bioms)
-            print(self.bioms_cei)
-            if self.bioms_cei == "город":
-                self.MATERIALS = {'land': DARKGRAY,'road': GRAY, 'water' : DARKGRAY}
-            elif self.bioms_cei == "лес":
-                self.MATERIALS = {'land': DARKGREEN,'road': BROWN, 'water' : BLUE}
-            elif self.bioms_cei == "пустыня":
-                self.MATERIALS = {'land': YELLOW,'road':ORANGE, 'water' : YELLOW}
-            elif self.bioms_cei == "болото":
-                self.MATERIALS = {'land': DARKDARKGREEN,'road': DARKDARKGREEN, 'water' : DARKGREEN}
+            self.change = random.randint(0,1)
+            if self.change == 1:
+                self.bioms_cei = random.choice(self.bioms)
+                if self.bioms_cei == "город":
+                    self.MATERIALS = {'land': DARKGRAY,'road': GRAY, 'water' : DARKGRAY}
+                elif self.bioms_cei == "лес":
+                    self.MATERIALS = {'land': DARKGREEN,'road': BROWN, 'water' : BLUE}
+                elif self.bioms_cei == "пустыня":
+                    self.MATERIALS = {'land': YELLOW,'road':ORANGE, 'water' : YELLOW}
+                elif self.bioms_cei == "болото":
+                    self.MATERIALS = {'land': DARKDARKGREEN,'road': DARKDARKGREEN, 'water' : DARKGREEN}
 
 
 
