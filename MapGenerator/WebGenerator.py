@@ -17,8 +17,8 @@ class Bioms_generator:
         else:
             self.change = random.randint(0,1)
             if self.change == 1:
-                self.bioms_cei = random.choice(self.bioms)
-                if self.bioms_cei == "город":
+                self.bioms_cei = random.choice(self.bioms)ere
+                if self.bioms_cei == "город":rer
                     self.MATERIALS = {'land': DARKGRAY,'road': GRAY, 'water' : DARKGRAY}
                 elif self.bioms_cei == "лес":
                     self.MATERIALS = {'land': DARKGREEN,'road': BROWN, 'water' : BLUE}
