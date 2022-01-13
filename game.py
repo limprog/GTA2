@@ -1,5 +1,6 @@
 import pygame.sprite
 
+from MapGenerator.WebGenerator import WebGenerator
 from sprites.Player import *
 from sprites.Weapon import *
 from sprites.Cartridges import *

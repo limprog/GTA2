@@ -112,7 +112,6 @@ class Player(pygame.sprite.Sprite):
 
         if self.rect.top < 0:
             if self.map_y > 1:
-                print("self.map_y >= 1:", self.map_y)
                 self.rect.bottom = HEIGHT
                 self.map_y -= 1
                 self.again = 1
