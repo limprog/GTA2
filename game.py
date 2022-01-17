@@ -1,11 +1,9 @@
 import pygame.sprite
-
 from MapGenerator.WebGenerator import WebGenerator
 from sprites.Player import *
-from sprites.Weapon import *
-from sprites.Cartridges import *
 from sprites.Backpack import *
 from MapGenerator.WebGenerator import *
+from sprites.Zombie import *
 class Game:
     def __init__(self):
 
@@ -18,7 +16,7 @@ class Game:
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
         map_group = pygame.sprite.Group()
-
+        zombie = Zombie()
         backpack = Backpack()
         player = Player()
 
@@ -31,7 +29,7 @@ class Game:
                 #print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)
 
-        all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group)
+        all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group,zombie)
         # Цикл игры
         running = True
         while running:
