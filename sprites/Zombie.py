@@ -6,9 +6,8 @@ from constants import *
 
 
 class Zombie(pygame.sprite.Sprite):
-    def __init__(self, player):
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.player = player
         self.image = pygame.Surface((50, 50))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
