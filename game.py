@@ -32,7 +32,8 @@ class Game:
                 #print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)
         zombie_group.add(zombie)
-        all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group,zombie)
+        all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group,zombie_group,
+                        backpack.ammunition_group)
         # Цикл игры
         running = True
         while running:
@@ -52,6 +53,7 @@ class Game:
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
             zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
+            ammunition_collision = pygame.sprite.spritecollide(player, backpack.ammunition_group, True)
             if len(zombies_collision) >= 1:
                 player.h_p -= 1
                 if player.h_p <= 0:
@@ -65,6 +67,10 @@ class Game:
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
                     backpack.сartridges.moveToRandomPoint()
+                if random.randint(0,3) == 0:
+                    all_sprites.add(backpack.ammunition)
+                    backpack.ammunition_group.add(backpack.ammunition)
+                    backpack.ammunition.moveToRandomPoint()
                 if random.randint(0,0) == 0:
                     backpack.weapon.kill()
                     backpack.Random_weapon()
