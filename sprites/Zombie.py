@@ -11,7 +11,7 @@ class Zombie(pygame.sprite.Sprite):
         self.image = pygame.Surface((50, 50))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self.rect.center = (random.randint(0,WIDTH), random.randint(0, HEIGHT))
         self.speedx = 0
         self.speedy = 0
 

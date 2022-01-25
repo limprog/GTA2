@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.again = 0
         self.map_x = 3
         self.map_y = 3
+        self.h_p = 20
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
@@ -125,6 +126,7 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.rect.bottom = HEIGHT
                 self.speedy = 0
+
 
 
         prev_keystate = keystate

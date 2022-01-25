@@ -16,9 +16,12 @@ class Game:
         #присвоение спрайтов
         all_sprites = pygame.sprite.Group()
         map_group = pygame.sprite.Group()
+        zombie_group = pygame.sprite.Group()
         zombie = Zombie()
         backpack = Backpack()
         player = Player()
+        f1 = pygame.font.Font(None, 70)
+        self.text1 = f1.render('', True,RED)
 
         web = WebGenerator().createWeb
         map_group.add(web)
@@ -28,7 +31,7 @@ class Game:
         #     for cell in row:
                 #print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)
-
+        zombie_group.add(zombie)
         all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group,zombie)
         # Цикл игры
         running = True
@@ -47,8 +50,13 @@ class Game:
             map_group.update()
 
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
-
+            zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
+            if len(zombies_collision) >= 1:
+                player.h_p -= 1
+                if player.h_p <= 0:
+                    player.kill()
+                    self.text1 = f1.render('ВЫ ПРИГРАЛИ!', True,RED)
             if player.again == 1:
                 web = WebGenerator().createWeb
                 map_group.empty()
@@ -71,6 +79,7 @@ class Game:
             screen.fill(BLACK)
             map_group.draw(screen)
             all_sprites.draw(screen)
+            screen.blit(self.text1, (WIDTH / 2, HEIGHT / 2))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
