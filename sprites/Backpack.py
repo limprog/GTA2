@@ -1,14 +1,15 @@
 from sprites.Player import *
-from sprites.Weapon.Weapon import *
 from sprites.Cartridges import *
 from sprites.Weapon.firearms import *
-from sprites.Ammunition import *
+from sprites.Ammunition.Ammunition import *
+from sprites.Ammunition.ammunitions import *
+
 
 class Backpack:
     def __init__(self):
         self.weapon = Gun()
         self.сartridges = Cartridges()
-        self.ammunition = Ammunition()
+        self.ammunition = Helmet1()
         self.сartridges_group = pygame.sprite.Group()
         self.weapon_group = pygame.sprite.Group()
         self.ammunition_group = pygame.sprite.Group()
@@ -19,3 +20,6 @@ class Backpack:
     def Random_weapon(self):
         weapons = [Gun(), Сrossbow(), Shotgun(), Kalash(),Revolver(),Ultrasound()]
         self.weapon = random.choice(weapons)
+    def Random_ammunitions(self):
+        ammunitions = [Helmet1(), Helmet2(), Helmet3(), Bib1(), Bib2()]
+        self.ammunition = random.choice(ammunitions)

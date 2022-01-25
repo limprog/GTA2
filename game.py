@@ -68,6 +68,8 @@ class Game:
                     backpack.сartridges_group.add(backpack.сartridges)
                     backpack.сartridges.moveToRandomPoint()
                 if random.randint(0,3) == 0:
+                    backpack.ammunition.kill()
+                    backpack.Random_ammunitions()
                     all_sprites.add(backpack.ammunition)
                     backpack.ammunition_group.add(backpack.ammunition)
                     backpack.ammunition.moveToRandomPoint()
