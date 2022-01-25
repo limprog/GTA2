@@ -2,6 +2,7 @@ import pygame
 import random
 import time
 
+
 class Inventori():
     def __init__(self):
         self.cells_height = 9

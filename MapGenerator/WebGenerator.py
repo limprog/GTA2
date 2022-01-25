@@ -3,7 +3,7 @@ from constants import *
 import random
 from sprites.Player import *
 
-SIDESIZE = 120
+SIDESIZE = 60
 class Bioms_generator:
     def __init__(self):
         self.bioms = ["пустыня","лес","город", "болото"]
@@ -37,7 +37,7 @@ class WebCell(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((SIDESIZE, SIDESIZE))
         self.image.fill(material)
-        self.rect =self.image.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.center = (x+SIDESIZE//2, y+SIDESIZE//2)
         #print("webcell", self.rect.x, self.rect.y)
 

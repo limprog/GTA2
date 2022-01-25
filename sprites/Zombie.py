@@ -34,3 +34,6 @@ class Zombie(pygame.sprite.Sprite):
         if  self.a == 1:
             self.speedx = 0
             self.speedy = 0
+    def moveToRandomPoint(self):
+        self.rect.x = random.randint(0, WIDTH)
+        self.rect.y = random.randint(0, HEIGHT)

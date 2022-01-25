@@ -22,12 +22,14 @@ class Player(pygame.sprite.Sprite):
         self.map_x = 3
         self.map_y = 3
         self.h_p = 20
+        self.cat_amount = 5
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
                     'up': keystate[pygame.K_w] or keystate[pygame.K_UP],
                     "right": keystate[pygame.K_d] or keystate[pygame.K_RIGHT],
-                    'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT]}
+                    'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT],
+                    }
         return key_dict
 
     def update(self):

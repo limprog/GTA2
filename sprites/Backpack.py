@@ -1,7 +1,5 @@
-from sprites.Player import *
 from sprites.Cartridges import *
 from sprites.Weapon.firearms import *
-from sprites.Ammunition.Ammunition import *
 from sprites.Ammunition.ammunitions import *
 
 
@@ -10,6 +8,7 @@ class Backpack:
         self.weapon = Gun()
         self.сartridges = Cartridges()
         self.ammunition = Helmet1()
+        self.nlo_group = pygame.sprite.Group()
         self.сartridges_group = pygame.sprite.Group()
         self.weapon_group = pygame.sprite.Group()
         self.ammunition_group = pygame.sprite.Group()
