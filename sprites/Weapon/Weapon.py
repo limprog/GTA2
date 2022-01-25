@@ -24,7 +24,3 @@ class Weapon (pygame.sprite.Sprite):
     def update(self):
         pass
 
-class Gun(Weapon):
-    def __init__(self):
-        super().__init__(damage=10, texture='оружие_03.png')
-

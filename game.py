@@ -57,7 +57,9 @@ class Game:
                     all_sprites.add(backpack.сartridges)
                     backpack.сartridges_group.add(backpack.сartridges)
                     backpack.сartridges.moveToRandomPoint()
-                if random.randint(0,7) == 0:
+                if random.randint(0,0) == 0:
+                    backpack.weapon.kill()
+                    backpack.Random_weapon()
                     all_sprites.add(backpack.weapon)
                     backpack.weapon_group.add(backpack.weapon)
                     backpack.weapon.moveToRandomPoint()
