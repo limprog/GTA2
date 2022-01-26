@@ -20,12 +20,13 @@ class Game:
         all_sprites = pygame.sprite.Group()
         map_group = pygame.sprite.Group()
         zombie_group = pygame.sprite.Group()
+        nlo_grop = pygame.sprite.Group()
         zombie = Zombie()
         backpack = Backpack()
         player = Player()
         f1 = pygame.font.Font(None, 70)
         self.text1 = f1.render('', True,RED)
-
+        bullets = []
         web = WebGenerator().createWeb
         map_group.add(web)
 
@@ -54,10 +55,12 @@ class Game:
                         x2,y2 = event.pos
                         nlo = NLO(x1=player.rect.x, y1=player.rect.y,x2=x2,y2=y2,damage=3)
                         all_sprites.add(nlo)
-                        nlo_grop = pygame.sprite.Group()
                         nlo_grop.add(nlo)
-                        if abs(nlo.rect.x - x2) < 50  or abs(nlo.rect.y - y2) < 50:
-                            nlo.kill()
+                        bullets.append(nlo)
+            for nlo_elem in bullets:
+                if abs(nlo_elem.rect.x - nlo_elem.x2) < 50 and abs(nlo_elem.rect.y - nlo_elem.y2) < 50:
+                    bullets.remove(nlo_elem)
+                    nlo_elem.kill()
             # Обновление
             all_sprites.update()
             map_group.update()
