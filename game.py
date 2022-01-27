@@ -54,8 +54,8 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:  # левая кнопка мыши
                         x2,y2 = event.pos
-                        if player.cat_amount >= 1 :
-                            player.cat_amount -= 1
+                        if player.clip >= 1 :
+                            player.clip-= 1
                             nlo = NLO(x1=player.rect.x, y1=player.rect.y,x2=x2,y2=y2,damage=3)
                             all_sprites.add(nlo)
                             nlo_group.add(nlo)
@@ -68,9 +68,10 @@ class Game:
             # Обновление
             all_sprites.update()
             map_group.update()
-
+            self.text6 = f1.render("Монеты: "+ str(player.conin), True,GREEN)
             self.text2 = f1.render("HP: "+str(player.h_p), True,RED)
-            self.text3 = f1.render("пули: "+str(player.cat_amount), True, GREEN)
+            self.text3 = f1.render("Патроны: "+str(player.cat_amount), True, GREEN)
+            self.text5 = f1.render('Магазин: '+ str(player.clip),True,  RED)
 
             ### Проверить эффективность! Не замедляет ли.
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
@@ -102,6 +103,7 @@ class Game:
                     if kill_zombie_collision[0].hp <= 0:
                         self.text4 = f2.render('', True, WHITE)
                         kill_zombie_collision[0].kill()
+                        player.conin += 1
 
             if player.again == 1:
                 web = WebGenerator().createWeb
@@ -113,6 +115,7 @@ class Game:
                 zombie.kill()
                 self.text4 = f2.render('', True, WHITE)
                 if random.randint(0,1) == 0:
+                    zombie.hp = 20
                     zombie_group.add(zombie)
                     all_sprites.add(zombie_group)
                     zombie.moveToRandomPoint()
@@ -143,6 +146,8 @@ class Game:
             screen.blit(self.text2, (60,60))
             screen.blit(self.text3, (60, 120))
             screen.blit(self.text4, (zombie.rect.x,zombie.rect.y))
+            screen.blit(self.text5, (60,180))
+            screen.blit(self.text6, (60,240))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()

@@ -17,20 +17,18 @@ class Zombie(pygame.sprite.Sprite):
 
     def update(self):
         player = Player()
-        if player.rect.x - self.rect.x <= 50 or player.rect.y - self.rect.y <= 50:
-            pass
-        else:
-            one_control = random.randint(0,5)
-            if one_control == 1:
-                two_control = random.randint(0,3)
-                if two_control == 0:
-                    self.speedx -= 1
-                elif two_control == 1:
-                    self.speedx += 1
-                elif two_control == 2:
-                    self.speedy -= 1
-                elif two_control == 3:
-                    self.speedy += 1
+
+        one_control = random.randint(0,5)
+        if one_control == 1:
+            two_control = random.randint(0,3)
+            if two_control == 0:
+                self.speedx -= 1
+            elif two_control == 1:
+                self.speedx += 1
+            elif two_control == 2:
+                self.speedy -= 1
+            elif two_control == 3:
+                self.speedy += 1
         self.rect.y += self.speedy
         self.rect.x += self.speedx
 

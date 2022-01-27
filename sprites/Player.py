@@ -22,14 +22,17 @@ class Player(pygame.sprite.Sprite):
         self.map_x = 3
         self.map_y = 3
         self.h_p = 20
-        self.cat_amount = 5
+        self.clip = 0
+        self.clip_cons = 7
+        self.cat_amount = 14
+        self.conin = 0
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
                     'up': keystate[pygame.K_w] or keystate[pygame.K_UP],
                     "right": keystate[pygame.K_d] or keystate[pygame.K_RIGHT],
                     'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT],
-                    }
+                    'r': keystate[pygame.K_r],'b' :keystate[pygame.K_b] }
         return key_dict
 
     def update(self):
@@ -37,6 +40,15 @@ class Player(pygame.sprite.Sprite):
         keystate = self.translateMovement(pygame.key.get_pressed())
         abs_speed = 8
         abs_speed_shift = 14
+        if keystate['r']:
+            if self.cat_amount >= self.clip_cons:
+                if self.clip == 0 :
+                    self.cat_amount -= self.clip_cons
+                    self.clip = self.clip_cons
+            # else:
+            #     left = self.clip_cons - self.cat_amount
+            #     self.clip = left
+            #     self.cat_amount = left
         if keystate['left']:
             self.speedx -= 0.1
             if self.speedx <= -abs_speed:

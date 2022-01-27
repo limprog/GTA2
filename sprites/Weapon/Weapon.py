@@ -5,7 +5,7 @@ import os
 from constants import *
 
 class Weapon (pygame.sprite.Sprite):
-    def __init__ (self, damage=0, texture=None):
+    def __init__ (self, damage=0, texture=None, clip = 0 ):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((25, 25))
 
