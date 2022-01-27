@@ -3,8 +3,7 @@ import random
 import os
 import time
 from constants import *
-
-
+from sprites.Player import *
 class Zombie(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -14,23 +13,28 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.center = (random.randint(0,WIDTH), random.randint(0, HEIGHT))
         self.speedx = 0
         self.speedy = 0
-        self.hp = 10
+        self.hp = 20
 
     def update(self):
-
-        one_control = random.randint(0,5)
-        if one_control == 1:
-            two_control = random.randint(0,3)
-            if two_control == 0:
-                self.speedx -= 1
-            elif two_control == 1:
-                self.speedx += 1
-            elif two_control == 2:
-                self.speedy -= 1
-            elif two_control == 3:
-                self.speedy += 1
+        player = Player()
+        if player.rect.x - self.rect.x <= 50 or player.rect.y - self.rect.y <= 50:
+            pass
+        else:
+            one_control = random.randint(0,5)
+            if one_control == 1:
+                two_control = random.randint(0,3)
+                if two_control == 0:
+                    self.speedx -= 1
+                elif two_control == 1:
+                    self.speedx += 1
+                elif two_control == 2:
+                    self.speedy -= 1
+                elif two_control == 3:
+                    self.speedy += 1
         self.rect.y += self.speedy
         self.rect.x += self.speedx
+
+
         self.a = random.randint(0,14)
         if  self.a == 1:
             self.speedx = 0

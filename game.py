@@ -20,11 +20,13 @@ class Game:
         all_sprites = pygame.sprite.Group()
         map_group = pygame.sprite.Group()
         zombie_group = pygame.sprite.Group()
-        nlo_grop = pygame.sprite.Group()
+        nlo_group = pygame.sprite.Group()
         zombie = Zombie()
         backpack = Backpack()
         player = Player()
+        f2 = pygame.font.Font(None, 30)
         f1 = pygame.font.Font(None, 70)
+        self.text4 = f2.render(str(zombie.hp),True,WHITE)
         self.text1 = f1.render('', True,RED)
         web = WebGenerator().createWeb
         map_group.add(web)
@@ -52,12 +54,16 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:  # левая кнопка мыши
                         x2,y2 = event.pos
-                        nlo = NLO(x1=player.rect.x, y1=player.rect.y,x2=x2,y2=y2,damage=3)
-                        all_sprites.add(nlo)
-                        nlo_grop.add(nlo)
+                        if player.cat_amount >= 1 :
+                            player.cat_amount -= 1
+                            nlo = NLO(x1=player.rect.x, y1=player.rect.y,x2=x2,y2=y2,damage=3)
+                            all_sprites.add(nlo)
+                            nlo_group.add(nlo)
+                        else:
+                            pass
 
-            for nlo_elem in nlo_grop:
-                if abs(nlo_elem.rect.x - nlo_elem.x2) < 50 and abs(nlo_elem.rect.y - nlo_elem.y2) < 50:
+            for nlo_elem in nlo_group:
+                if abs(nlo_elem.rect.x - nlo_elem.x2) < 25 and abs(nlo_elem.rect.y - nlo_elem.y2) < 25:
                     nlo_elem.kill()
             # Обновление
             all_sprites.update()
@@ -69,13 +75,14 @@ class Game:
             ### Проверить эффективность! Не замедляет ли.
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
             zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
-
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             ammunition_collision = pygame.sprite.spritecollide(player, backpack.ammunition_group, True)
 
             kill_zombie_collisions = []
-            for nlo_elem in nlo_grop:
+            for nlo_elem in nlo_group:
                 kill_zombie_collisions.append(pygame.sprite.spritecollide(nlo_elem, zombie_group, False))
+
+
 
             if len(сartridges_collision) >= 1:
                 player.cat_amount += 7
@@ -88,8 +95,12 @@ class Game:
                     self.text1 = f1.render('ВЫ ПРОИГРАЛИ!', True,RED)
             for kill_zombie_collision in kill_zombie_collisions:
                 if len(kill_zombie_collision)>=1:
-                    kill_zombie_collision[0].hp-=1
+
+                    kill_zombie_collision[0].hp-= 3
+                    self.text4 = f2.render(str(zombie.hp),True,WHITE)
+                    kill_zombie_collisions2 = pygame.sprite.spritecollide(kill_zombie_collision[0], nlo_group, True)
                     if kill_zombie_collision[0].hp <= 0:
+                        self.text4 = f2.render('', True, WHITE)
                         kill_zombie_collision[0].kill()
 
             if player.again == 1:
@@ -100,10 +111,12 @@ class Game:
                 backpack.weapon.kill()
                 backpack.сartridges.kill()
                 zombie.kill()
+                self.text4 = f2.render('', True, WHITE)
                 if random.randint(0,1) == 0:
                     zombie_group.add(zombie)
                     all_sprites.add(zombie_group)
                     zombie.moveToRandomPoint()
+                    self.text4 = f2.render(str(zombie.hp), True, WHITE)
                 if random.randint(0,3) == 0:
                     backpack.сartridges_group.add(backpack.сartridges)
                     all_sprites.add(backpack.сartridges)
@@ -129,6 +142,7 @@ class Game:
             screen.blit(self.text1, (WIDTH / 2, HEIGHT / 2))
             screen.blit(self.text2, (60,60))
             screen.blit(self.text3, (60, 120))
+            screen.blit(self.text4, (zombie.rect.x,zombie.rect.y))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
