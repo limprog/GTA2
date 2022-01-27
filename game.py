@@ -26,7 +26,6 @@ class Game:
         player = Player()
         f1 = pygame.font.Font(None, 70)
         self.text1 = f1.render('', True,RED)
-        bullets = []
         web = WebGenerator().createWeb
         map_group.add(web)
 
@@ -56,10 +55,9 @@ class Game:
                         nlo = NLO(x1=player.rect.x, y1=player.rect.y,x2=x2,y2=y2,damage=3)
                         all_sprites.add(nlo)
                         nlo_grop.add(nlo)
-                        bullets.append(nlo)
-            for nlo_elem in bullets:
+
+            for nlo_elem in nlo_grop:
                 if abs(nlo_elem.rect.x - nlo_elem.x2) < 50 and abs(nlo_elem.rect.y - nlo_elem.y2) < 50:
-                    bullets.remove(nlo_elem)
                     nlo_elem.kill()
             # Обновление
             all_sprites.update()
@@ -67,10 +65,18 @@ class Game:
 
             self.text2 = f1.render("HP: "+str(player.h_p), True,RED)
             self.text3 = f1.render("пули: "+str(player.cat_amount), True, GREEN)
+
+            ### Проверить эффективность! Не замедляет ли.
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
             zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
+
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             ammunition_collision = pygame.sprite.spritecollide(player, backpack.ammunition_group, True)
+
+            kill_zombie_collisions = []
+            for nlo_elem in nlo_grop:
+                kill_zombie_collisions.append(pygame.sprite.spritecollide(nlo_elem, zombie_group, False))
+
             if len(сartridges_collision) >= 1:
                 player.cat_amount += 7
             if len(zombies_collision) >= 1:
@@ -80,6 +86,12 @@ class Game:
                 if player.h_p <= 0:
                     player.kill()
                     self.text1 = f1.render('ВЫ ПРОИГРАЛИ!', True,RED)
+            for kill_zombie_collision in kill_zombie_collisions:
+                if len(kill_zombie_collision)>=1:
+                    kill_zombie_collision[0].hp-=1
+                    if kill_zombie_collision[0].hp <= 0:
+                        kill_zombie_collision[0].kill()
+
             if player.again == 1:
                 web = WebGenerator().createWeb
                 map_group.empty()

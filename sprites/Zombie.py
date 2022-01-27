@@ -14,6 +14,7 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.center = (random.randint(0,WIDTH), random.randint(0, HEIGHT))
         self.speedx = 0
         self.speedy = 0
+        self.hp = 10
 
     def update(self):
 
