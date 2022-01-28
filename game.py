@@ -1,5 +1,4 @@
 import time
-
 import pygame.sprite
 from MapGenerator.WebGenerator import WebGenerator
 from sprites.Player import *
@@ -7,6 +6,9 @@ from sprites.Backpack import *
 from MapGenerator.WebGenerator import *
 from sprites.Zombie import *
 from sprites.NLO import *
+from sprites.pig import *
+
+
 class Game:
     def __init__(self):
 
@@ -21,11 +23,14 @@ class Game:
         map_group = pygame.sprite.Group()
         zombie_group = pygame.sprite.Group()
         nlo_group = pygame.sprite.Group()
+        pig_group = pygame.sprite.Group()
         zombie = Zombie()
         backpack = Backpack()
         player = Player()
+        pig = Pig()
         f2 = pygame.font.Font(None, 30)
         f1 = pygame.font.Font(None, 70)
+        self.text7 = f2.render(str(pig.hp), True, WHITE)
         self.text4 = f2.render(str(zombie.hp),True,WHITE)
         self.text1 = f1.render('', True,RED)
         web = WebGenerator().createWeb
@@ -37,8 +42,9 @@ class Game:
                 #print('game', cell.rect.x, cell.rect.y)
                 # map_group.add(cell)
         zombie_group.add(zombie)
+        pig_group.add(pig)
         all_sprites.add(player,  backpack.сartridges_group, backpack.weapon_group,zombie_group,
-                        backpack.ammunition_group)
+                        backpack.ammunition_group, pig)
         # Цикл игры
         running = True
         while running:
@@ -78,13 +84,25 @@ class Game:
             zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             ammunition_collision = pygame.sprite.spritecollide(player, backpack.ammunition_group, True)
-
+            kill_pig_collisions = []
             kill_zombie_collisions = []
             for nlo_elem in nlo_group:
                 kill_zombie_collisions.append(pygame.sprite.spritecollide(nlo_elem, zombie_group, False))
-
-
-
+            for nlo_elem in nlo_group:
+                kill_pig_collisions.append(pygame.sprite.spritecollide(nlo_elem, pig_group, False))
+            for kill_pig_collision in kill_pig_collisions:
+                if len(kill_pig_collision) >= 1:
+                    kill_pig_collision[0].hp -= 3
+                    self.text7 = f2.render(str(pig.hp), True, WHITE)
+                    kill_pig_collisions2 = pygame.sprite.spritecollide(kill_pig_collision[0], nlo_group, True)
+                    if pig.hp <= 0:
+                        self.text7 =  f2.render(str(pig.hp), True, WHITE)
+                        pig.updat = 0
+                        pig_eat_collision = pygame.sprite.spritecollide(player, pig_group, False)
+                        if len(pig_eat_collision) >=1:
+                            player.h_p += 2
+                            self.text2 = f1.render(str(player.h_p))
+                            pig.kill()
             if len(сartridges_collision) >= 1:
                 player.cat_amount += 7
             if len(zombies_collision) >= 1:
@@ -96,7 +114,6 @@ class Game:
                     self.text1 = f1.render('ВЫ ПРОИГРАЛИ!', True,RED)
             for kill_zombie_collision in kill_zombie_collisions:
                 if len(kill_zombie_collision)>=1:
-
                     kill_zombie_collision[0].hp-= 3
                     self.text4 = f2.render(str(zombie.hp),True,WHITE)
                     kill_zombie_collisions2 = pygame.sprite.spritecollide(kill_zombie_collision[0], nlo_group, True)
@@ -114,6 +131,12 @@ class Game:
                 backpack.сartridges.kill()
                 zombie.kill()
                 self.text4 = f2.render('', True, WHITE)
+                if random.randint(0,3):
+                    pig.hp = 10
+                    pig_group.add(pig)
+                    all_sprites.add(pig)
+                    pig.moveToRandomPoint()
+                    self.text7 = f2.render(str(pig.hp),True,WHITE)
                 if random.randint(0,1) == 0:
                     zombie.hp = 20
                     zombie_group.add(zombie)
@@ -148,6 +171,7 @@ class Game:
             screen.blit(self.text4, (zombie.rect.x,zombie.rect.y))
             screen.blit(self.text5, (60,180))
             screen.blit(self.text6, (60,240))
+            screen.blit(self.text7, (pig.rect.x,pig.rect.y))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
