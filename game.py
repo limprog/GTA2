@@ -83,37 +83,33 @@ class Game:
             zombies_collision = pygame.sprite.spritecollide(player, zombie_group, False)
             weapon_collision = pygame.sprite.spritecollide(player, backpack.weapon_group, True)
             ammunition_collision = pygame.sprite.spritecollide(player, backpack.ammunition_group, True)
-            kill_pig_collisions = []
 
             kill_zombie_collisions = pygame.sprite.groupcollide(zombie_group, nlo_group, False, True)
+            kill_pig_collisions = pygame.sprite.groupcollide(pig_group, nlo_group, False, True)
 
-            # for nlo_elem in nlo_group:
-            #     kill_zombie_collisions.append(pygame.sprite.spritecollide(nlo_elem, zombie_group, False))
-            for nlo_elem in nlo_group:
-                kill_pig_collisions.append(pygame.sprite.spritecollide(nlo_elem, pig_group, False))
+            pig_eat_collision = pygame.sprite.spritecollide(player, pig_group, False)
 
-            for kill_pig_collision in kill_pig_collisions:
-                if len(kill_pig_collision) >= 1:
+            for kill_pig_collision in kill_pig_collisions.items():
                     kill_pig_collision[0].hp -= 3
-                    self.text7 = f2.render(str(pig.hp), True, WHITE)
-                    kill_pig_collisions2 = pygame.sprite.spritecollide(kill_pig_collision[0], nlo_group, True)
+                    self.text7 = f2.render(str(kill_pig_collision[0].hp), True, WHITE)
                     if kill_pig_collision[0].hp <= 0:
                         self.text7 = f2.render(str(kill_pig_collision[0].hp), True, WHITE)
                         pig.updat = 0
-                        pig_eat_collision = pygame.sprite.spritecollide(player, pig_group, False)
-                        if len(pig_eat_collision) >= 1:
-                            player.h_p += 2
-                            self.text2 = f1.render(str(player.h_p))
-                            pig.kill()
+
+            if len(pig_eat_collision) >= 1:
+                if pig.updat == 0:
+                    player.h_p += 2
+                    self.text2 = f1.render(str(player.h_p), True, WHITE)
+                    pig.updat=1
+                    pig.kill()
+                else:
+                    player.h_p -= 1
             if len(сartridges_collision) >= 1:
                 player.cat_amount += 7
             if len(zombies_collision) >= 1:
                 player.h_p -= 1
                 player.rect.y -= player.speedy + 20
                 player.rect.x -= player.speedx + 20
-                if player.h_p <= 0:
-                    player.kill()
-                    self.text1 = f1.render('ВЫ ПРОИГРАЛИ!', True, RED)
             for kill_zombie_collision in kill_zombie_collisions.items():
                 kill_zombie_collision[0].hp -= 3
                 self.text4 = f2.render(str(kill_zombie_collision[0].hp),True,WHITE)
@@ -121,7 +117,9 @@ class Game:
                     self.text4 = f2.render('', True, WHITE)
                     kill_zombie_collision[0].kill()
                     player.conin += 1
-
+            if player.h_p <= 0:
+                player.kill()
+                self.text1 = f1.render('ВЫ ПРОИГРАЛИ!', True, RED)
             if player.again == 1:
                 web = WebGenerator().createWeb
                 map_group.empty()
