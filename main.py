@@ -1,6 +1,10 @@
 from game import *
+
+
 def main_loop():
     pass
+
+
 def init():
     pass
 

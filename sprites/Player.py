@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
                     'up': keystate[pygame.K_w] or keystate[pygame.K_UP],
                     "right": keystate[pygame.K_d] or keystate[pygame.K_RIGHT],
                     'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT],
-                    'r': keystate[pygame.K_r],'b' :keystate[pygame.K_b] }
+                    'r': keystate[pygame.K_r], 'b': keystate[pygame.K_b]}
         return key_dict
 
     def update(self):
@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
         abs_speed_shift = 14
         if keystate['r']:
             if self.cat_amount >= self.clip_cons:
-                if self.clip == 0 :
+                if self.clip == 0:
                     self.cat_amount -= self.clip_cons
                     self.clip = self.clip_cons
             # else:
@@ -140,7 +140,5 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.rect.bottom = HEIGHT
                 self.speedy = 0
-
-
 
         prev_keystate = keystate

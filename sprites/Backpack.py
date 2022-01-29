@@ -17,8 +17,9 @@ class Backpack:
         self.ammunition_group.add(self.ammunition)
 
     def Random_weapon(self):
-        weapons = [Gun(), Сrossbow(), Shotgun(), Kalash(),Revolver(),Ultrasound()]
+        weapons = [Gun(), Сrossbow(), Shotgun(), Kalash(), Revolver(), Ultrasound()]
         self.weapon = random.choice(weapons)
+
     def Random_ammunitions(self):
         ammunitions = [Helmet1(), Helmet2(), Helmet3(), Bib1(), Bib2()]
         self.ammunition = random.choice(ammunitions)

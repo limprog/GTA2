@@ -24,5 +24,3 @@ class Bib1(Ammunition):
 class Bib2(Ammunition):
     def __init__(self):
         super().__init__(texture='оружие_41.png')
-
-

@@ -3,6 +3,8 @@ import time
 import random
 import os
 from constants import *
+
+
 class Ammunition(pygame.sprite.Sprite):
     def __init__(self, texture=None):
         pygame.sprite.Sprite.__init__(self)
@@ -12,7 +14,7 @@ class Ammunition(pygame.sprite.Sprite):
         self.image = player_img
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
-        self.rect.center = (random.randint(0, WIDTH), random.randint(0,HEIGHT))
+        self.rect.center = (random.randint(0, WIDTH), random.randint(0, HEIGHT))
 
     def moveToRandomPoint(self):
         self.rect.x = random.randint(0, WIDTH)
