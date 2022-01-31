@@ -119,6 +119,9 @@ class Game:
             if len(weapon_collision) >= 1:
                 inventory.addItemInv(weapon_collision[0])
 
+            if len(ammunition_collision) >= 1:
+                inventory.addItemInv(ammunition_collision[0])
+
             if len(pig_eat_collision) >= 1:
                 if pig.updat == 0:
                     player.hp += 2

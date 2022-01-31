@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.atk = 0
         self.armor = {'head': None, 'chest': None, 'legs': None, 'feet': None}
         self.weapon = None
-        self.prot = None
+        self.prot = 0
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
