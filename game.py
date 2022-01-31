@@ -110,7 +110,7 @@ class Game:
             pig_eat_collision = pygame.sprite.spritecollide(player, pig_group, False)
 
             for kill_pig_collision in kill_pig_collisions.items():
-                kill_pig_collision[0].hp -= 3
+                kill_pig_collision[0].hp -= player.damage
                 self.text7 = f2.render(str(kill_pig_collision[0].hp), True, WHITE)
                 if kill_pig_collision[0].hp <= 0:
                     self.text7 = f2.render(str(kill_pig_collision[0].hp), True, WHITE)
@@ -137,7 +137,7 @@ class Game:
                 player.rect.y -= player.speedy + 20
                 player.rect.x -= player.speedx + 20
             for kill_zombie_collision in kill_zombie_collisions.items():
-                kill_zombie_collision[0].hp -= 3
+                kill_zombie_collision[0].hp -= player.damage
                 self.text4 = f2.render(str(kill_zombie_collision[0].hp), True, WHITE)
                 if kill_zombie_collision[0].hp <= 0:
                     self.text4 = f2.render('', True, WHITE)

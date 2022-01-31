@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.clip_cons = 7
         self.cat_amount = 14
         self.conin = 0
-        self.atk = 0
+        self.damage = 0
         self.armor = {'head': None, 'chest': None, 'legs': None, 'feet': None}
         self.weapon = None
         self.prot = 0
@@ -50,12 +50,11 @@ class Player(pygame.sprite.Sprite):
         if self.armor[slot] != None:
             self.prot -= self.armor[slot].prot
             self.armor[slot] = None
-        print(self.armor)
     def equip_weapon(self, weapon):
         if self.weapon != None:
             self.unequip_weapon()
         self.weapon = weapon
-        self.atk += weapon.atk
+        self.damage = weapon.damage
 
     def unequip_weapon(self):
         if self.weapon != None:

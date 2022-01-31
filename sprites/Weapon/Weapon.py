@@ -20,7 +20,6 @@ class Weapon(Equipable):
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0, WIDTH), random.randint(0, HEIGHT))
         self.damage = damage
-        self.atk = atk
         self.slot = 'weapon'
         self.wpn_type = wpn_type
 
