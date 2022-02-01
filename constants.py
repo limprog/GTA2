@@ -1,9 +1,11 @@
-WIDTH = 1920
-HEIGHT = 1080
+WIDTH = 1000
+HEIGHT = 800
 FPS = 60
 cell_side = 60
 
-# Задаем цвета
+'''
+Используемые цвета
+'''
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -17,3 +19,13 @@ DARKGRAY = (153, 153, 153)
 BROWN = (150, 75, 0)
 DARKDARKGREEN = (0, 60, 25)
 PINK = (255, 105, 180)
+
+'''
+Инвентарь
+'''
+TILESIZE = 32
+UIHEIGTH = 300
+INVTILESIZE = 48
+COINOFFSET = 4
+GRIDWIDTH = WIDTH / cell_side
+GRIDHEIGHT = HEIGHT /  cell_side

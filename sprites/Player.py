@@ -21,11 +21,15 @@ class Player(pygame.sprite.Sprite):
         self.again = 0
         self.map_x = 3
         self.map_y = 3
-        self.h_p = 20
+        self.hp = 20
         self.clip = 0
         self.clip_cons = 7
         self.cat_amount = 14
         self.conin = 0
+        self.damage = 0
+        self.armor = {'head': None, 'chest': None, 'legs': None, 'feet': None}
+        self.weapon = None
+        self.prot = 0
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
@@ -34,6 +38,29 @@ class Player(pygame.sprite.Sprite):
                     'down': keystate[pygame.K_s] or keystate[pygame.K_DOWN], "shift": keystate[pygame.K_LSHIFT],
                     'r': keystate[pygame.K_r], 'b': keystate[pygame.K_b]}
         return key_dict
+
+    def equip_armor(self, item):
+        if self.armor[item.slot] != None:
+            self.unequip_armor(item.slot)
+        self.armor[item.slot] = item
+        self.prot += item.prot
+        print(self.armor)
+
+    def unequip_armor(self, slot):
+        if self.armor[slot] != None:
+            self.prot -= self.armor[slot].prot
+            self.armor[slot] = None
+    def equip_weapon(self, weapon):
+        if self.weapon != None:
+            self.unequip_weapon()
+        self.weapon = weapon
+        self.damage = weapon.damage
+
+    def unequip_weapon(self):
+        if self.weapon != None:
+            self.atk -= self.weapon.atk
+            self.weapon = None
+        print(self.weapon)
 
     def update(self):
         self.again = 0
