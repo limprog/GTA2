@@ -2,6 +2,7 @@ from game import *
 from constants import *
 import pygame
 from MapGenerator.WebGenerator import *
+import os
 import time
 
 '''
@@ -12,9 +13,12 @@ import time
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((50, 50))
-        self.image.fill(GREEN)
+        game_folder = os.path.dirname(__file__)
+        img_folder = os.path.join(game_folder, '..\imge\plaer')
+        player_img = pygame.image.load(os.path.join(img_folder, '1.png')).convert()
+        self.image = player_img
         self.rect = self.image.get_rect()
+        self.image.set_colorkey(WHITE)
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
         self.speedy = 0
@@ -78,13 +82,16 @@ class Player(pygame.sprite.Sprite):
             #     self.cat_amount = left
         if keystate['left']:
             self.speedx -= 0.1
+            self.image = pygame.transform.rotate(self.image, -90)
             if self.speedx <= -abs_speed:
                 self.speedx = -abs_speed
+
 
         if keystate['right']:
             self.speedx += 0.1
             if self.speedx >= abs_speed:
                 self.speedx = abs_speed
+                self.image = pygame.transform.rotate(self.image, 90)
 
         if keystate['down']:
             self.speedy += 0.1
@@ -104,6 +111,7 @@ class Player(pygame.sprite.Sprite):
             self.speedx += 0.3
             if self.speedx >= abs_speed_shift:
                 self.speedx = abs_speed_shift
+                self.image = pygame.transform.rotate(self.image, 90)
 
         if keystate['down'] and keystate["shift"]:
             self.speedy += 0.3
