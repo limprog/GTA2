@@ -9,8 +9,11 @@ from sprites.Player import *
 class Zombie(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((50, 50))
-        self.image.fill(RED)
+        game_folder = os.path.dirname(__file__)
+        img_folder = os.path.join(game_folder, '..\imge')
+        player_img = pygame.image.load(os.path.join(img_folder, 'волк.png')).convert()
+        self.image = player_img
+        self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0, WIDTH), random.randint(0, HEIGHT))
         self.speedx = 0

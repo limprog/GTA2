@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         player_img = pygame.image.load(os.path.join(img_folder, '1.png')).convert()
         self.image = player_img
         self.rect = self.image.get_rect()
+
         self.image.set_colorkey(WHITE)
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
