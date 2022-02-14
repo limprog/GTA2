@@ -1,5 +1,5 @@
 WIDTH = 1920
-HEIGHT = 1800
+HEIGHT = 1080
 FPS = 60
 cell_side = 60
 

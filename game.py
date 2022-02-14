@@ -30,12 +30,17 @@ class Game:
         player = Player()
         pig = Pig()
         inventory = Inventory(player, 10, 5, 2)
-
+        self.weapon_text = ""
         f2 = pygame.font.Font(None, 30)
         f1 = pygame.font.Font(None, 70)
         self.text7 = f2.render(str(pig.hp), True, WHITE)
         self.text4 = f2.render(str(zombie.hp), True, WHITE)
         self.text1 = f1.render('', True, RED)
+
+        self.weapon_rect = pygame.Rect((WIDTH-200, HEIGHT-200, 100, 75))
+
+        weapon_font = pygame.font.Font(None, 20)
+
         web = WebGenerator().createWeb
         map_group.add(web)
 
@@ -96,6 +101,7 @@ class Game:
             self.text2 = f1.render("HP: " + str(player.hp), True, RED)
             self.text3 = f1.render("Патроны: " + str(player.cat_amount), True, GREEN)
             self.text5 = f1.render('Магазин: ' + str(player.clip), True, RED)
+            self.weapon_text_renderer = weapon_font.render(self.weapon_text, True, WHITE)
 
             ### Проверить эффективность! Не замедляет ли.
             сartridges_collision = pygame.sprite.spritecollide(player, backpack.сartridges_group, True)
@@ -117,6 +123,7 @@ class Game:
                     pig.updat = 0
 
             if len(weapon_collision) >= 1:
+                self.weapon_text = weapon_collision[0].text
                 inventory.addItemInv(weapon_collision[0])
 
             if len(ammunition_collision) >= 1:
@@ -196,6 +203,9 @@ class Game:
             screen.blit(self.text5, (60, 180))
             screen.blit(self.text6, (60, 240))
             screen.blit(self.text7, (pig.rect.x, pig.rect.y))
+            pygame.draw.rect(screen, RED,
+                             (WIDTH-200, HEIGHT-100, 200, 100))
+            screen.blit(self.weapon_text_renderer, (WIDTH-200, HEIGHT-100))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()

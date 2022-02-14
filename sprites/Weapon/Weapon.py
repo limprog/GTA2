@@ -7,7 +7,7 @@ from ..Inventory import Equipable
 
 
 class Weapon(Equipable):
-    def __init__(self, damage=0, texture=None, clip=0, atk=0, wpn_type=None):
+    def __init__(self, damage=0, texture=None, clip=0, atk=0, wpn_type=None, text = "Мы ничего не придумали"):
         Equipable.__init__(self, texture, damage)
         self.image = pygame.Surface((25, 25))
 
@@ -22,6 +22,13 @@ class Weapon(Equipable):
         self.damage = damage
         self.slot = 'weapon'
         self.wpn_type = wpn_type
+        self.text = text
+
+    def rect_weapon(self, text):
+        font = pygame.font.Font(None, 25)
+        text = font.render(text, True, BLACK)
+        r1 = pygame.Rect((WIDTH-300, HEIGHT-200, 100, 75))
+
 
     def moveToRandomPoint(self):
         self.rect.x = random.randint(0, WIDTH)
