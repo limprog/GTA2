@@ -7,7 +7,7 @@ from sprites.Weapon.Weapon import *
 
 class Gun(Weapon):
     def __init__(self):
-        super().__init__(damage=3, texture='оружие_03.png', clip=7, atk=7)
+        super().__init__(damage=3, texture='оружие_03.png', clip=7, atk=7, text="ручное короткоствольное стрелковое оружие,\n предназначенное для поражения\n целей (живой силы\n и других) на\n дальности до 25-50\n метров.")
 
 
 class Сrossbow(Weapon):
