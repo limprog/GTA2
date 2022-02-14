@@ -63,9 +63,9 @@ class Player(pygame.sprite.Sprite):
 
     def unequip_weapon(self):
         if self.weapon != None:
-            self.atk -= self.weapon.atk
+            self.damage = 0
             self.weapon = None
-        print(self.weapon)
+
 
     def update(self):
         self.again = 0
