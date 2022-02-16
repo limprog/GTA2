@@ -1,3 +1,4 @@
 http://www.pygame.org/docs/ref/key.html - коды кнопак
 https://mrtsepa.gitbooks.io/pygame-tutorial/content/reference/pygame/events.html - туториал по клавишам и мышки
 https://pythonru.com/primery/streljalka-s-pygame-3-stolknovenija-i-strelba - столкновение в пайгем
+get_pos() -> (x, y)
