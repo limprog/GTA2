@@ -9,8 +9,8 @@ class Pig(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder, '..\imge\weapon')
-        player_img = pygame.image.load(os.path.join(img_folder, 'оружие_38.png')).convert()
+        img_folder = os.path.join(game_folder, '..\imge')
+        player_img = pygame.image.load(os.path.join(img_folder, 'fsh09SH.png')).convert()
         self.image = player_img
         self.image.set_colorkey(WHITE)
         self.image =pygame.transform.scale (self.image,(self.image.get_width() // 2,self.image.get_height() // 2))

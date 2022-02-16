@@ -10,8 +10,8 @@ class Zombie(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder, '..\imge\weapon')
-        player_img = pygame.image.load(os.path.join(img_folder, 'оружие_40.png')).convert()
+        img_folder = os.path.join(game_folder, '..\imge')
+        player_img = pygame.image.load(os.path.join(img_folder, 'волк.png')).convert()
         self.image = player_img
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
