@@ -18,7 +18,6 @@ class Player(pygame.sprite.Sprite):
         player_img = pygame.image.load(os.path.join(img_folder, '1.png')).convert()
         self.image = player_img
         self.rect = self.image.get_rect()
-
         self.image.set_colorkey(WHITE)
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
         self.speedx = 0
@@ -35,6 +34,7 @@ class Player(pygame.sprite.Sprite):
         self.armor = {'head': None, 'chest': None, 'legs': None, 'feet': None}
         self.weapon = None
         self.prot = 0
+
 
     def translateMovement(self, keystate):
         key_dict = {'left': keystate[pygame.K_a] or keystate[pygame.K_LEFT],
@@ -63,9 +63,9 @@ class Player(pygame.sprite.Sprite):
 
     def unequip_weapon(self):
         if self.weapon != None:
-            self.atk -= self.weapon.atk
+            self.damage = 0
             self.weapon = None
-        print(self.weapon)
+
 
     def update(self):
         self.again = 0
@@ -83,7 +83,7 @@ class Player(pygame.sprite.Sprite):
             #     self.cat_amount = left
         if keystate['left']:
             self.speedx -= 0.1
-            self.image = pygame.transform.rotate(self.image, -90)
+
             if self.speedx <= -abs_speed:
                 self.speedx = -abs_speed
 
@@ -92,8 +92,6 @@ class Player(pygame.sprite.Sprite):
             self.speedx += 0.1
             if self.speedx >= abs_speed:
                 self.speedx = abs_speed
-                self.image = pygame.transform.rotate(self.image, 90)
-
         if keystate['down']:
             self.speedy += 0.1
             if self.speedy >= 8:
@@ -113,7 +111,6 @@ class Player(pygame.sprite.Sprite):
             if self.speedx >= abs_speed_shift:
                 self.speedx = abs_speed_shift
                 self.image = pygame.transform.rotate(self.image, 90)
-
         if keystate['down'] and keystate["shift"]:
             self.speedy += 0.3
             if self.speedy >= abs_speed_shift:

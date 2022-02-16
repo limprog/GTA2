@@ -30,12 +30,15 @@ class Game:
         player = Player()
         pig = Pig()
         inventory = Inventory(player, 10, 5, 2)
-
+        self.weapon_text = ""
         f2 = pygame.font.Font(None, 30)
         f1 = pygame.font.Font(None, 70)
         self.text7 = f2.render(str(pig.hp), True, WHITE)
         self.text4 = f2.render(str(zombie.hp), True, WHITE)
         self.text1 = f1.render('', True, RED)
+
+        weapon_font = pygame.font.Font(None, 20)
+
         web = WebGenerator().createWeb
         map_group.add(web)
 
@@ -117,6 +120,7 @@ class Game:
                     pig.updat = 0
 
             if len(weapon_collision) >= 1:
+                self.weapon_text = weapon_collision[0].text
                 inventory.addItemInv(weapon_collision[0])
 
             if len(ammunition_collision) >= 1:
@@ -196,6 +200,11 @@ class Game:
             screen.blit(self.text5, (60, 180))
             screen.blit(self.text6, (60, 240))
             screen.blit(self.text7, (pig.rect.x, pig.rect.y))
+            pygame.draw.rect(screen, RED,
+                             (WIDTH-300, HEIGHT-150, 300, 150))
+
+            for i, l in enumerate(self.weapon_text.splitlines()):
+                screen.blit(weapon_font.render(l, True, WHITE),(WIDTH-300, HEIGHT-150+20*i))
 
             # После отрисовки всего, переворачиваем экран
             pygame.display.flip()
